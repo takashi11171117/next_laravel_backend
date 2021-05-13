@@ -23,7 +23,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if ($guard == 'teacher')
+                    return redirect()->intended(config('app.frontend_url').RouteServiceProvider::TEACHER_HOME);
+                if ($guard == 'admin')
+                    return redirect()->intended(config('app.frontend_url').RouteServiceProvider::ADMIN_HOME);
+                return redirect()->intended(config('app.frontend_url').RouteServiceProvider::HOME);
             }
         }
 
