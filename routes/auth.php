@@ -7,7 +7,8 @@ Route::namespace('App\Http\Controllers\Auth')->group(function() {
          ->middleware('guest');
 
     Route::post('/login', 'AuthenticatedSessionController@store')
-         ->middleware('guest');
+         ->middleware('guest')
+         ->name('login');
 
     Route::post('/forgot-password', 'PasswordResetLinkController@store')
          ->middleware('guest')
@@ -38,7 +39,8 @@ Route::prefix('teacher')->namespace('App\Http\Controllers\Auth\Teacher')->group(
          ->middleware('guest:teacher');
 
     Route::post('/login', 'AuthenticatedSessionController@store')
-         ->middleware('guest:teacher');
+         ->middleware('guest:teacher')
+         ->name('teacher.login');
 
     Route::post('/forgot-password', 'PasswordResetLinkController@store')
          ->middleware('guest:teacher')
@@ -49,17 +51,17 @@ Route::prefix('teacher')->namespace('App\Http\Controllers\Auth\Teacher')->group(
          ->name('teacher.password.update');
 
     Route::get('/verify-email/{id}/{hash}', 'VerifyEmailController@__invoke')
-         ->middleware(['auth', 'signed', 'throttle:6,1'])
+         ->middleware(['auth:teacher', 'signed', 'throttle:6,1'])
          ->name('teacher.verification.verify');
 
     Route::post('/email/verification-notification', 'EmailVerificationNotificationController@store')
-         ->middleware(['auth', 'throttle:6,1'])
+         ->middleware(['auth:teacher', 'throttle:6,1'])
          ->name('teacher.verification.send');
 
     Route::post('/confirm-password', 'ConfirmablePasswordController@store')
-         ->middleware('auth');
+         ->middleware('auth:teacher');
 
     Route::post('/logout', 'AuthenticatedSessionController@destroy')
-         ->middleware('auth')
+         ->middleware('auth:teacher')
          ->name('teacher.logout');
 });
