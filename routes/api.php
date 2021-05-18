@@ -18,6 +18,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth:teacher'])->get('/teacher', function (Request $request) {
-    return $request->user('teacher');
+Route::group(['middleware' => ['auth:teacher']], function () {
+    Route::get('/teacher', function (Request $request) {
+        return $request->user('teacher');
+    });
+
+    Route::group(['prefix' => 'videos'], function () {
+        Route::get('/', 'VideoController@index');
+    });
 });
