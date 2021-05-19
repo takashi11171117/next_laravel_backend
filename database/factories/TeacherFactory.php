@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class TeacherFactory extends Factory
@@ -26,7 +27,7 @@ class TeacherFactory extends Factory
             'name' => $this->faker->unique()->name,
             'email' => $this->faker->unique()->email,
             'email_verified_at' => now(),
-            'password' => password_hash('password', PASSWORD_DEFAULT),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }

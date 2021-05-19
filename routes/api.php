@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,5 @@ Route::group(['middleware' => ['auth:teacher']], function () {
         return $request->user('teacher');
     });
 
-    Route::group(['prefix' => 'videos'], function () {
-        Route::get('/', 'VideoController@index');
-    });
+    Route::get('/teacher/videos', [VideoController::class, 'index']);
 });
