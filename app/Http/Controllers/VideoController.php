@@ -21,4 +21,11 @@ class VideoController extends Controller
 
         return VideoIndexResource::collection($videos);
     }
+
+    public function findListByTeacher(string $name) : AnonymousResourceCollection
+    {
+        $videos = $this->videos->paginateByTeacher($name);
+
+        return VideoIndexResource::collection($videos);
+    }
 }

@@ -24,5 +24,5 @@ Route::group(['middleware' => ['auth:teacher']], function () {
         return $request->user('teacher');
     });
 
-    Route::get('/teacher/videos', [VideoController::class, 'index']);
+    Route::get('/teacher/videos/{name}', [VideoController::class, 'findListByTeacher']);
 });

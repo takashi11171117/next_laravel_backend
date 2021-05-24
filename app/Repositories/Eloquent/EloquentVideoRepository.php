@@ -14,6 +14,16 @@ class EloquentVideoRepository extends RepositoryAbstract implements VideoReposit
         return Video::class;
     }
 
+    public function paginateByTeacher(string $teacher_name)
+    {
+        return $this->entity
+            ->with(['teacher'])
+            ->whereHas('teacher', function ($query) use ($teacher_name) {
+                $query->where('name', $teacher_name);
+            })
+            ->paginate(20);
+    }
+
     public function findWithRelations(int $id)
     {
         $model = $this->entity->with(['teacher'])
