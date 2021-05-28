@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\{
-    VideoRepository
+    VideoRepository,
+    TeacherRepository
 };
 
 use App\Repositories\Eloquent\{
-    EloquentVideoRepository
+    EloquentVideoRepository,
+    EloquentTeacherRepository
 };
 
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(VideoRepository::class, EloquentVideoRepository::class);
+        $this->app->bind(TeacherRepository::class, EloquentTeacherRepository::class);
     }
 
     /**
