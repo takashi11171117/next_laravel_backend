@@ -18,9 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/teachers', [TeacherController::class, 'index']);
+Route::get('/teacher/{name}/videos/', [VideoController::class, 'findListByTeacher']);
+Route::get('/teacher/{name}', [TeacherController::class, 'show']);
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 });
 
 Route::group(['middleware' => ['auth:teacher']], function () {

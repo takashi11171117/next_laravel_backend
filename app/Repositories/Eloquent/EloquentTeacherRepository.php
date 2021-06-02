@@ -13,4 +13,18 @@ class EloquentTeacherRepository extends RepositoryAbstract implements TeacherRep
     {
         return Teacher::class;
     }
+
+    public function findWhereFirst(string $column, string $value)
+    {
+        $model = $this->entity
+            ->where($column, $value)->first();
+
+        if (!$model) {
+            throw (new ModelNotFoundException())->setModel(
+                get_class($this->entity->getModel())
+            );
+        }
+
+        return $model;
+    }
 }
