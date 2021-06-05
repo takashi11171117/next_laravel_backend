@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\VideoIndexResource;
+use App\Http\Resources\VideoResource;
 use App\Repositories\Contracts\VideoRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -27,5 +28,12 @@ class VideoController extends Controller
         $videos = $this->videos->paginateByTeacher($name);
 
         return VideoIndexResource::collection($videos);
+    }
+
+    public function show(int $id) : VideoResource
+    {
+        $video = $this->videos->findWithRelations($id);
+
+        return new VideoResource($video);
     }
 }
