@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
@@ -26,6 +27,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::get('/subscription', [SubscriptionController::class, 'index']);
+    Route::get('/subscription/status', [SubscriptionController::class, 'status']);
+    Route::post('/subscription/subscribe', [SubscriptionController::class, 'subscribe']);
+    Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel']);
+    Route::post('/subscription/resume', [SubscriptionController::class, 'resume']);
+    Route::post('/subscription/change_plan', [SubscriptionController::class, 'change_plan']);
+    Route::post('/subscription/update_card', [SubscriptionController::class, 'update_card']);
 });
 
 Route::group(['middleware' => ['auth:teacher']], function () {
