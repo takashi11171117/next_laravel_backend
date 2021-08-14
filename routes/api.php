@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/video/{id}', [VideoController::class, 'show']);
+Route::post('/video', [VideoController::class, 'store']);
 Route::get('/teachers', [TeacherController::class, 'index']);
 Route::get('/teacher/{name}/videos/', [VideoController::class, 'findListByTeacher']);
 Route::get('/teacher/{name}', [TeacherController::class, 'show']);

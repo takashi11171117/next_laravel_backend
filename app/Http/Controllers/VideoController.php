@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
 use App\Http\Resources\VideoIndexResource;
 use App\Http\Resources\VideoResource;
 use App\Repositories\Contracts\VideoRepository;
+// use App\Repositories\Eloquent\EloquentVideoRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
@@ -35,5 +38,19 @@ class VideoController extends Controller
         $video = $this->videos->findWithRelations($id);
 
         return new VideoResource($video);
+    }
+
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        $video = $this->videos->post($request);
+        return response()->json($video);
+
+        // $result = '登録したよ';
+        // return response()->json($result);
     }
 }
