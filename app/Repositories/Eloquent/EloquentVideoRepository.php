@@ -40,7 +40,7 @@ class EloquentVideoRepository extends RepositoryAbstract implements VideoReposit
 
     public function post($properties)
     {
-        $model = new Video;
+        $model = $this->entity;
         $form = $properties->all();
         $model->fill($form)->save();
         return $model;

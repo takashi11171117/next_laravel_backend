@@ -8,7 +8,7 @@ use App\Http\Resources\VideoResource;
 use App\Repositories\Contracts\VideoRepository;
 // use App\Repositories\Eloquent\EloquentVideoRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Request;
+use App\Http\Requests\VideoRequest;
 
 class VideoController extends Controller
 {
@@ -45,12 +45,11 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
-    public function store(Request $request)
+    public function store(VideoRequest $request)
     {
-        $video = $this->videos->post($request);
+
+        $video = $this->videos->post($request->validate());
         return response()->json($video);
 
-        // $result = '登録したよ';
-        // return response()->json($result);
     }
 }
