@@ -13,7 +13,7 @@ class VideoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,9 +25,9 @@ class VideoRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            // 'thumbnail_path' => 'nullable|string',
-            // 'vimeo_video_id' => 'nullable|string',
-            // 'teacher_id' => 'nullable|integer',
+            'thumbnail_path' => 'nullable|string',
+            'vimeo_video_id' => 'nullable|string',
+            'teacher_id' => 'nullable|integer',
         ];
     }
 
